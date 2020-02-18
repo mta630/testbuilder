@@ -15,12 +15,16 @@ var detectNetwork = function(cardNumber) {
   // Once you've read this, go ahead and try to implement this function, then return to the console.
   // Visa always has a prefix of 4 and a length of 13, 16, or 19.
   // MasterCard always has a prefix of 51, 52, 53, 54, or 55 and a length of 16.
-
+  // Discover always has a prefix of 6011, 644-649, or 65, and a length of 16 or 19.
+  // Maestro always has a prefix of 5018, 5020, 5038, or 6304, and a length of 12-19.
 
   // Converting String to individual number variables for easy reading of code
   firstDigit = Number(cardNumber[0]);
   secondDigit = Number(cardNumber[1]);
   length = cardNumber.length;
+  firstFourDigits = Number(cardNumber.substr(0,3));
+  firstTwoDigits = Number(cardNumber.substr(0,1));
+
 
   // Conditional statements for card numbers that dont start with a specific digit
 
@@ -48,6 +52,18 @@ var detectNetwork = function(cardNumber) {
 
   if (firstDigit === 5 && length === 16 && secondDigit > 0 && secondDigit < 6){
   	return "MasterCard";
+  }
+
+  // Conditional statements for Discover
+
+  if ((length === 16 || length === 19) && (firstFourDigits === 6011 || firstTwoDigits === 64 || firstTwoDigits === 65)){
+  	return "Discover";
+  }
+
+  // Conditional statements for Maestro 5018, 5020, 5038, or 6304
+
+  if ((length > 11 && length < 20) && (firstFourDigits === 5018 || firstFourDigits === 5020 || firstFourDigits === 5038 || firstFourDigits === 6304)){
+  	return "Maestro";
   }
 
   // in any other case we will need to return invalid card number

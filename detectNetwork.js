@@ -14,15 +14,31 @@ var detectNetwork = function(cardNumber) {
 
   // Once you've read this, go ahead and try to implement this function, then return to the console.
 
-  if (cardNumber[0] !== 3){
-  	return "This is not a valid Card Number";
-  } else if ((cardNumber[1] === '8' || cardNumber[1] === '9') && cardNumber.length === 14){
-  	return "Diner's Club";
-  } else if ((cardNumber[1] === '4' || cardNumber[1] === '7') && cardNumber.length === 15){
-  	return "American Express";
-  } else {
-  	return "This is not a valid Card Number";
+  firstDigit = Number(cardNumber[0]);
+  secondDigit = Number(cardNumber[1]);
+  length = cardNumber.length;
+
+  // Conditional statements for invalid card numbers not starting with 3
+
+  if (firstDigit !== 3){
+  	return "Invalid Card Number";
   }
+
+  // Conditional statements for Diner's Club
+
+  if ((secondDigit === 8 || secondDigit === 9) && length === 14){
+  	return "Diner's Club";
+  }
+
+  // Conditional statements for American Express
+
+  if ((secondDigit === 4 || secondDigit === 7) && length === 15){
+  	return "American Express";
+  }
+
+  // in any other case we will need to return invalid card number
+
+  return "Invalid Card Number";
   
 };
 

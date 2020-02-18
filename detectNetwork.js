@@ -19,16 +19,16 @@ var detectNetwork = function(cardNumber) {
   // Maestro always has a prefix of 5018, 5020, 5038, or 6304, and a length of 12-19.
 
   // Converting String to individual number variables for easy reading of code
-  firstDigit = Number(cardNumber[0]);
-  secondDigit = Number(cardNumber[1]);
-  length = cardNumber.length;
-  firstFourDigits = Number(cardNumber.substr(0,3));
-  firstTwoDigits = Number(cardNumber.substr(0,1));
+  var firstDigit = Number(cardNumber[0]);
+  var secondDigit = Number(cardNumber[1]);
+  var length = cardNumber.length;
+  var firstFourDigits = Number(cardNumber.substr(0,4));
+  var firstTwoDigits = Number(cardNumber.substr(0,2));
 
 
   // Conditional statements for card numbers that dont start with a specific digit
 
-  if (firstDigit < 3 || firstDigit > 5){
+  if (firstDigit < 3 || firstDigit > 6){
   	return "Invalid Card Number";
   }
 
@@ -55,9 +55,10 @@ var detectNetwork = function(cardNumber) {
   }
 
   // Conditional statements for Discover
+  // Discover always has a prefix of 6011, 644-649, or 65, and a length of 16 or 19.
 
-  if ((length === 16 || length === 19) && (firstFourDigits === 6011 || firstTwoDigits === 64 || firstTwoDigits === 65)){
-  	return "Discover";
+  if ((length === 19 || length === 16) && (firstFourDigits === 6011 || firstTwoDigits === 64 || firstTwoDigits === 65)){
+	return "Discover";
   }
 
   // Conditional statements for Maestro 5018, 5020, 5038, or 6304

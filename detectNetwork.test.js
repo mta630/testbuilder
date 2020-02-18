@@ -327,18 +327,17 @@ describe('Discover', function() {
 
 // Creating a function to generate a certain set of numbers to add to a prefix for testing
 
-function generateNumbers(prefix, totalLength){
-  var numbersNeeded = totalLength - prefix.length;
+var generateNumbers = function(prefix, totalLength){
   var resultString = prefix;
 
-  for (var i = 0; i < numbersNeeded; i ++){
+  while (resultString.length < totalLength){
     resultString += '1';
   }
 
   return resultString;
 }
 
-describe ('China UnionPay' function() {
+describe ('China UnionPay', function() {
   var should = chai.should();
   var prefixArray = [];
   var lengthArray = [16, 17, 18, 19];
@@ -346,28 +345,27 @@ describe ('China UnionPay' function() {
 
   // populating the prefixArray with a set of loops
 
-  for (var i = 622126; i < 622926; i ++){
+  for (let i = 622126; i < 622926; i ++){
     prefixArray.push(i.toString());
   }
 
-  for (var i = 624; i < 627; i ++){
+  for (i = 624; i < 627; i ++){
     prefixArray.push(i.toString());
   }
 
-  for (var i = 6282; i < 6289; i ++){
+  for (i = 6282; i < 6289; i ++){
     prefixArray.push(i.toString());
   }
 
-  // using chai.equal to run the test the appropriate amount of times (every possible combination)
+  // using chai.should to run the test the appropriate amount of times (every possible combination)
 
-  for (var i = 0; i < prefixArray.length; i++){
-    for (var j = 0; j < lengthArray.length; j++){
-      it('has a prefix of ${prefixArray[i]} and a length of ${lengthArray[j]}', function () {
-        detectNetwork(generateNumbers(prefixArray[i],lengthArray[j])).should.equal(networkName);
-      })
+  for (let i = 0; i < prefixArray.length; i++){
+    for (let j = 0; j < lengthArray.length; j++){
+      it(`has a prefix of ${prefixArray[i]} and a length of ${lengthArray[j]}`, function() {
+        detectNetwork(generateNumbers(prefixArray[i], lengthArray[j])).should.equal(networkName);
+      });
     }
   }
-
 })
 
 describe('Switch', function() {
@@ -376,9 +374,9 @@ describe('Switch', function() {
   var lengthArray = [16, 18, 19];
   var networkName = "Switch";
 
-  for (var i = 0; i < prefixArray.length; i ++){
-    for (var j = 0; j < lengthArray.length; j ++){
-      it('has a prefix of ${prefixArray[i]} and a length of ${lengthArray[j]}', function () {
+  for (let i = 0; i < prefixArray.length; i ++){
+    for (let j = 0; j < lengthArray.length; j ++){
+      it(`has a prefix of ${prefixArray[i]} and a length of ${lengthArray[j]}`, function () {
         detectNetwork(generateNumbers(prefixArray[i], lengthArray[j])).should.equal(networkName);
       })
     }
